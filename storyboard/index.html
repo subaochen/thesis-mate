@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThesisMate - Pipeline 故事板演示</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 顶部导航：Pipeline 进度条 -->
+  <header class="pipeline-header">
+    <div class="pipeline-stages">
+      <button class="stage-btn active" data-stage="1" title="选题">
+        <span class="stage-icon">🎯</span>
+        <span class="stage-label">选题</span>
+        <span class="stage-dot"></span>
+      </button>
+      <button class="stage-btn" data-stage="2" title="开题报告">
+        <span class="stage-icon">📋</span>
+        <span class="stage-label">开题</span>
+        <span class="stage-dot"></span>
+      </button>
+      <button class="stage-btn" data-stage="3" title="方案设计">
+        <span class="stage-icon">🏗️</span>
+        <span class="stage-label">方案</span>
+        <span class="stage-dot"></span>
+      </button>
+      <button class="stage-btn" data-stage="4" title="实现">
+        <span class="stage-icon">💻</span>
+        <span class="stage-label">实现</span>
+        <span class="stage-dot"></span>
+      </button>
+      <button class="stage-btn" data-stage="5" title="论文">
+        <span class="stage-icon">📝</span>
+        <span class="stage-label">论文</span>
+        <span class="stage-dot"></span>
+      </button>
+      <button class="stage-btn" data-stage="6" title="答辩">
+        <span class="stage-icon"> podium</span>
+        <span class="stage-label">答辩</span>
+        <span class="stage-dot"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 主体内容区域 -->
+  <main class="main-content">
+    <!-- 左侧：AI 对话区 -->
+    <section class="chat-panel">
+      <div class="chat-header">
+        <span class="chat-icon">🤖</span>
+        <span class="chat-title">AI 助教</span>
+        <span class="status-badge" id="ai-status">在线 · DeepSeek V3</span>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <!-- 对话消息将通过 JS 动态生成 -->
+      </div>
+      <div class="chat-input-area">
+        <button class="restart-btn" id="restart-btn">🔄 重置对话</button>
+        <button class="ai-assistant-btn" id="ai-assistant-btn">
+          <span class="ai-badge">AI</span>
+          <span class="ai-icon">✨</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 中间：文件展示区 -->
+    <section class="file-panel">
+      <div class="file-header">
+        <h3>📊 中间文件预览</h3>
+        <span class="stage-name" id="current-stage-name">选题阶段</span>
+      </div>
+      <div class="file-actions">
+        <button class="action-btn" id="view-json-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          查看 JSON
+        </button>
+        <button class="action-btn" id="export-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
+          </svg>
+          导出文件
+        </button>
+      </div>
+      <div class="file-preview" id="file-preview">
+        <div class="no-file-selected">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          <p>点击>"查看 JSON"按钮查看当前阶段的中间文件</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 右侧：产物面板 -->
+    <section class="product-panel">
+      <div class="product-header">
+        <span class="product-icon">📦</span>
+        <span class="product-title">阶段产物</span>
+        <span class="product-status" id="product-status">Draft</span>
+      </div>
+      <div class="product-content" id="product-content">
+        <!-- 产物内容将通过 JS 动态生成 -->
+      </div>
+      <div class="product-footer">
+        <button class="review-btn" id="submit-review-btn">📤 提交审核</button>
+        <button class="edit-btn" id="edit-btn">✏️ 编辑</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- 底部：导师反馈区 -->
+  <footer class="feedback-section">
+    <h3 class="feedback-title">
+      <span class="feedback-icon">👨‍🏫</span>
+      导师反馈
+      <span class="feedback-count" id="feedback-count">(2 条)</span>
+    </h3>
+    <div class="feedback-list" id="feedback-list">
+      <!-- 导师反馈将通过 JS 动态生成 -->
+    </div>
+    <div class="feedback-input">
+      <textarea placeholder="添加反馈..." id="feedback-textarea"></textarea>
+      <button class="add-feedback-btn" id="add-feedback-btn">发送</button>
+    </div>
+  </footer>
+
+  <!-- JSON 查看模态框 -->
+  <div class="modal" id="json-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>JSON 中间文件</h3>
+        <button class="close-btn" id="close-json-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <pre id="json-content"></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- 加载脚本 -->
+  <script src="app.js"></script>
+</body>
+</html>

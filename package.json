@@ -1,0 +1,11 @@
+{
+  "name": "thesis-mate",
+  "version": "1.0.0",
+  "description": "Pipeline 毕业设计管理系统 - AI辅助对话式毕设平台，支持选题→开题→方案设计→实现→论文→答辩全流程，含中间文件仓库和知网注入插件",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest",
+    "dev": "nodemon src/index.js"
+  }
+}
